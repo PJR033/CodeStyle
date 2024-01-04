@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ShootingInstantiater : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-
     [SerializeField] private float _directionMultiplier;
-    [SerializeField] private GameObject _prefab;
+    [SerializeField] private GameObject _gameObject;
     [SerializeField] private float _timeWaitShooting;
 
     private Transform _shootObject;
@@ -24,7 +21,7 @@ public class ShootingInstantiater : MonoBehaviour
         while (isWork)
         {
             var direction = (_shootObject.position - transform.position).normalized;
-            var bullet = Instantiate(_prefab, transform.position + direction, Quaternion.identity);
+            var bullet = Instantiate(_gameObject, transform.position + direction, Quaternion.identity);
 
             bullet.GetComponent<Rigidbody>().transform.up = direction;
             bullet.GetComponent<Rigidbody>().velocity = direction * _directionMultiplier;
